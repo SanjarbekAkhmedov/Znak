@@ -1,0 +1,100 @@
+﻿@model MenuViewModel
+
+@for (int i = 0; i < @Model.TList.Count(); i = i + 2)
+{
+    var Products = @Model.TList.ToList();
+    Product firstProduct = Products[i];
+    Product secondProduct = null;
+    if (Products.Count() > i + 1)
+        secondProduct = Products[i + 1];
+
+    <div class="content justify-content-center">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <img src="~/images/blog-img-06.jpg" style="width:200px; height:200px" />
+                                </div>
+                                <div class="col-lg-6"> 
+                                    <h6 class="card-title">@firstProduct.Name</h6>
+                                    <p class="card-text">@firstProduct.Description</p>
+                                    <p class="card-text">Price: @firstProduct.Price</p>
+                                    <table border="0">
+                                        <tr>
+                                            <td>
+                                                <form method="post" asp-action="ViewProduct" asp-controller="Menu">
+                                                    <input type="hidden" asp-for="@firstProduct.Id" /><br />
+                                                    <input type="submit" class="btn btn-sm btn-success" value="View" />
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form method="post" asp-action="GetProduct" asp-controller="Menu">
+                                                    <input type="hidden" asp-for="@firstProduct.Id" /><br />
+                                                    <input type="submit" class="btn btn-sm btn-success" value="Edit" />
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form method="post" asp-action="DeleteProduct" asp-controller="Menu">
+                                                    <input type="hidden" asp-for="@firstProduct.Id" /><br />
+                                                    <input type="submit" class="btn btn-sm btn-success" value="Delete" />
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-md-6 -->
+                @if (secondProduct != null)
+                {
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <img src="~/images/blog-img-06.jpg" style="width:200px; height:200px" />
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <h6 class="card-title">@secondProduct?.Name</h6>
+                                        <p class="card-text">@secondProduct?.Description</p>
+                                        <p class="card-text">Price: @secondProduct.Price</p>
+                                        <table border="0">
+                                            <tr>
+                                                <td>
+                                                    <form method="post" asp-action="ViewProduct" asp-controller="Menu">
+                                                        <input type="hidden" asp-for="@secondProduct.Id" /><br />
+                                                        <input type="submit" class="btn btn-sm btn-success" value="View" />
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form method="post" asp-action="GetProduct" asp-controller="Menu">
+                                                        <input type="hidden" asp-for="@secondProduct.Id" /><br />
+                                                        <input type="submit" class="btn btn-sm btn-success" value="Edit" />
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form method="post" asp-action="DeleteProduct" asp-controller="Menu">
+                                                        <input type="hidden" asp-for="@secondProduct.Id" /><br />
+                                                        <input type="submit" class="btn btn-sm btn-success" value="Delete" />
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+}
+

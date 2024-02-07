@@ -1,0 +1,58 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Znak.Services;
+using Znak.ViewModels;
+using Znak.Repositories;
+
+namespace Znak.Controllers
+{
+    public class UnitMeasureController : ControllerBase
+    {
+        private readonly UnitMeasureRepository _unitMeasureRepository;
+
+        public UnitMeasureController(IAuthenticationUser authentication, UnitMeasureRepository unitMeasureRepository) : base(authentication)
+        {
+            _unitMeasureRepository = unitMeasureRepository;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var unitMeasures = await _unitMeasureRepository.GetAllAsync();
+            var unitMeasureViewModel = new UnitMeasureViewModel
+            {
+                UnitMeasures = unitMeasures.ToList()
+            };
+            return View(unitMeasureViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(UnitMeasureViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Index", viewModel);
+            }
+
+            await _unitMeasureRepository.CreateAsync(viewModel.UnitMeasure);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(UnitMeasureViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Index", viewModel);
+            }
+
+            await _unitMeasureRepository.UpdateAsync(viewModel.UnitMeasure.Id, viewModel.UnitMeasure);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(UnitMeasureViewModel viewModel)
+        {
+            await _unitMeasureRepository.DeleteAsync(viewModel.UnitMeasure.Id);
+            return RedirectToAction("Index");
+        }
+    }
+}

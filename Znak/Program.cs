@@ -1,23 +1,23 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System.Configuration;
-using Znak.Data;
+using Znak.Model;
+using Znak.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var services = builder.Services;
+services.AddMvc(op => { op.EnableEndpointRouting = false; });
+services.AddControllers();
+services.AddRazorPages();
+services.AddTransient<IAuthenticationUser, AuthenticationUser>();
+
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<AppDBContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("default")));
-
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDBContext>();
+builder.Services.AddDbContext<EFContext>();
 
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");

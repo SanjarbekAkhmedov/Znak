@@ -1,0 +1,19 @@
+﻿@model Product
+<div style="text-align:center; font-size:16px; text-justify:auto;">
+    <form method="post" asp-controller="Menu" asp-action="EditProduct" style="padding: 0 150px 0 150px">
+        <h4>Edit Product</h4>
+        <div>
+            Name: <input class="form-control" type="text" asp-for="Name" value="@Model.Name" />
+            Description: <input class="form-control" type="text" asp-for="Description" value="@Model.Description" />
+            Price: <input class="form-control" type="text" asp-for="Price" value="@Model.Price" />
+            Select Category: <select class="form-control" asp-for="ProductCategoryId" asp-items="@(new SelectList(ViewBag.ProductCategories,nameof(ProductCategory.Id),nameof(ProductCategory.Name)))">
+                <option>@Model.ProductCategory</option>
+            </select>
+            Select Unit: <select class="form-control" asp-for="UnitMeasureId" asp-items="@(new SelectList(ViewBag.UnitMeasures,nameof(UnitMeasure.Id),nameof(UnitMeasure.Name)))">
+                <option>@Model.UnitMeasure</option>
+            </select>
+            <input type="hidden" asp-for="@Model.Id" /><br />
+            <input class="btn btn-success" type="submit" value="Edit" /><br />
+        </div>
+    </form>
+</div>

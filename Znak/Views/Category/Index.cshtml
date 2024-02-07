@@ -1,0 +1,142 @@
+﻿@model CategoryViewModel
+@{
+}
+<div style="padding:5px">
+    <button id="myModelBtn" class="btn btn-sm btn-success">Add new category</button>
+</div>
+@{
+    int counter = 0;
+    if (Model.ProductCategories.Any())
+    {
+        <div>
+            <div class="table-responsive">
+                <table id="myTable" class="table table-striped" style="width: 100%;border-width:2px;">
+                    <thead>
+                        <tr class="row-cols-6">
+                            <th style="display:none"></th>
+                            <th class="col-1">Nm</th>
+                            <th class="col-1">Name</th>
+                            <th class="col-1">Description</th>
+                            <th class="col-6"></th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-style:italic;font-weight:500">
+                        @foreach (ProductCategory category in Model.ProductCategories)
+                        {
+                            counter++;
+                            <tr class="row-cols-6" id="IdTr">
+                                <td style="display:none">@category.Id</td>
+                                <td class="col-1">@counter</td>
+                                <td class="col-1" style="text-align: center;">@category.Name</td>
+                                <td class="col-1" style="text-align: center;">@category.Description</td>
+                                <td class="col-6">
+                                    <div style="position: absolute;right:10px; text-align:center">
+                                        <input class="btn btn-sm btn-success" id="myModelEditBtn" type="button" value="Edit" onclick="btnEditClick(@counter)" />
+                                        <a asp-action="Detail" asp-controller="Category"><input class="btn btn-sm btn-success" type="button" value="Detail" /></a>
+                                        <input class="btn btn-sm btn-success" type="button" value="Delete" onclick="btnDeleteClick(@counter)" />
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+}
+
+
+<div id="myModal" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div>
+                <h3 class="modal-title" id="myModalLabel" style="text-align:center; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-size:18px;top:10px">Add category</h3>
+            </div>
+            <div style="padding: 10px">
+                <form class="form-group" method="post" asp-controller="Category" asp-action="Add" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="ProductCategory.Id" value="" /><br />
+                    <input type="text" placeholder="Name" class="form-control" asp-for="ProductCategory.Name" value="" /><br />
+                    <input type="text" placeholder="Description" class="form-control" asp-for="ProductCategory.Description" value="" /><br />
+                    <div class="modal-footer">
+                        <input type="submit" value="Add" class="btn btn-sm btn-success" style="text-align:center; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-size:16px" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="myEditModal" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div>
+                <h3 class="modal-title" id="myModalLabel" style="text-align:center; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-size:18px;top:10px">Edit category</h3>
+            </div>
+            <div style="padding: 10px">
+                <form class="form-group" method="post" asp-controller="Category" asp-action="Edit" enctype="multipart/form-data">
+                    <input id="CategoryId" type="hidden" asp-for="ProductCategory.Id" value="" /><br />
+                    <input id="CategoryName" type="text" placeholder="Name" class="form-control" asp-for="ProductCategory.Name" value="" /><br />
+                    <input id="CategoryDescription" type="text" placeholder="Description" class="form-control" asp-for="ProductCategory.Description" value="" /><br />
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-sm btn-success" value="Edit" style="text-align:center; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-size:16px" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="myDeleteModal" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div>
+                <h3 class="modal-title" id="myModalLabel" style="text-align:center; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-size:18px;top:10px">Confirm to delete</h3>
+            </div>
+            <div style="padding: 10px">
+                <form class="form-group" method="post" asp-controller="Category" asp-action="Delete" enctype="multipart/form-data">
+                    <input id="myDeleteModalCategoryId" type="hidden" asp-for="ProductCategory.Id" /><br />
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-sm btn-success" value="Delete" style="text-align:center; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-size:16px" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var modal = document.getElementById("myModal");
+    var editModal = document.getElementById("myEditModal");
+    var myDeleteModal = document.getElementById("myDeleteModal");
+    var btn = document.getElementById("myModelBtn");
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    function btnEditClick(idRow) {
+        var currentRow = document.getElementById("myTable").rows[idRow];
+        editModal.style.display = "block";
+        document.getElementById("CategoryId").value = currentRow.cells[0].innerHTML;
+        document.getElementById("CategoryName").value = currentRow.cells[2].innerHTML;
+        document.getElementById("CategoryDescription").value = currentRow.cells[3].innerHTML;
+    }
+
+    function btnDeleteClick(idRow) {
+        var currentRow = document.getElementById("myTable").rows[idRow];
+        myDeleteModal.style.display = "block";
+        document.getElementById("myDeleteModalCategoryId").value = currentRow.cells[0].innerHTML;
+    }
+
+
+
+
+
+    window.onclick = function (event) {
+        if (event.target == modal || event.target == editModal || event.target == myDeleteModal) {
+            modal.style.display = "none";
+            editModal.style.display = "none";
+            myDeleteModal.style.display = "none";
+        }
+    }
+</script>

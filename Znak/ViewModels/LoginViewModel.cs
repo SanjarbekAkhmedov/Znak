@@ -1,17 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Znak.ViewModels
+﻿namespace Znak.ViewModels
 {
     public class LoginViewModel
     {
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; }
-        [Required]
-        [DataType(DataType.Password)]
+        public string Login { get; set; }
         public string Password { get; set; }
-
-        [Display(Name = "Remember Me")]
-        public bool RememberMe { get; set; }
     }
 }
