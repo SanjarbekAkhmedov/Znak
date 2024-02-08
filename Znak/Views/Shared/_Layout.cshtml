@@ -102,10 +102,18 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="~/images/sanjar.jpg" class="img-size-50 mr-3 img-circle" alt="User Image">
+                        @if (Setting.CurrentUser.Avatar != null && Setting.CurrentUser.Avatar.Length > 0)
+                        {
+                            string imageBase64 = Convert.ToBase64String(Setting.CurrentUser.Avatar);
+                            <img src="data:image;base64,@imageBase64" class="img-size-50 mr-3 img-circle" alt="User Image">
+                        }
+                        else
+                        {
+                            <img src="~/images/default-avatar.jpg" class="img-size-50 mr-3 img-circle" alt="Default Avatar">
+                        }
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Sanjar Akhmedov</a>
+                        <a href="#" class="d-block">@Setting.CurrentUser.FirstName @Setting.CurrentUser.LastName</a>
                     </div>
                 </div>
 

@@ -27,11 +27,11 @@
 
                 <form method="post" asp-controller="Admin" asp-action="Admin" enctype="multipart/form-data">
                     <div class="form-group has-feedback">
-                        <input type="text" class="form-control" placeholder="Login" asp-for="Login">
+                        <input type="text" class="form-control" placeholder="Login" asp-for="Login" required>
                         <span class="fa fa-envelope form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
-                        <input type="password" class="form-control" placeholder="Password" asp-for="Password">
+                        <input type="password" class="form-control" placeholder="Password" asp-for="Password" required>
                         <span class="fa fa-lock form-control-feedback"></span>
                     </div>
                     <div class="row">
@@ -52,7 +52,7 @@
 
                 <!-- /.social-auth-links -->
                 <p class="mb-0">
-                    <a href="#" class="text-center">Register a new membership</a>
+                    <a asp-controller="User" asp-action="Registration" class="text-center">Register a new membership</a>
                 </p>
             </div>
             <!-- /.login-card-body -->

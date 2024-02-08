@@ -17,6 +17,23 @@ namespace Znak.Model
             Database.EnsureCreated();
         }
 
+        public override int SaveChanges()
+        {
+            SetDefaultZnakSystem();
+            return base.SaveChanges();
+        }
+
+        private void SetDefaultZnakSystem()
+        {
+            foreach (var entry in ChangeTracker.Entries<User>())
+            {
+                if (entry.State == EntityState.Added)
+                {
+                    
+                }
+            }
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder

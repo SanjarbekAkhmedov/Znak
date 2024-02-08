@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata.Ecma335;
 using Znak.Model.Entities;
 using Znak.Services;
 using Znak.ViewModels;
@@ -19,8 +20,16 @@ namespace Znak.Controllers
         [HttpPost]
         public IActionResult Admin(LoginViewModel loginViewModel)
         {
-            User user = Authentication.SignIn(loginViewModel.Login, loginViewModel.Password).Result;
-            return View(user);
+            try
+            {
+                User user = Authentication.SignIn(loginViewModel.Login, loginViewModel.Password).Result;
+                if (user != null)
+                    return View(user);
+            }
+            catch
+            {
+            }
+            return RedirectToAction("", nameof(User));
         }
     }
 }
