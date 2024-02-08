@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Znak.Repositories;
+using Znak.Model.Entities;
 using Znak.Services;
 using Znak.ViewModels;
 
@@ -7,9 +7,9 @@ namespace Znak.Controllers
 {
     public class CategoryController : ControllerBase
     {
-        private readonly ProductCategoryRepository _categoryRepository;
+        private readonly IRepository<ProductCategory> _categoryRepository;
 
-        public CategoryController(AuthenticationUser authentication, ProductCategoryRepository categoryRepository) : base(authentication)
+        public CategoryController(IAuthenticationUser authentication, IRepository<ProductCategory> categoryRepository) : base(authentication)
         {
             _categoryRepository = categoryRepository;
         }

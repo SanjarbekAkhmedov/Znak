@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Znak.Repositories;
+using Znak.Model.Entities;
 using Znak.Services;
 using Znak.ViewModels;
 
@@ -7,9 +7,9 @@ namespace Znak.Controllers
 {
     public class ProductController : ControllerBase
     {
-        private readonly ProductRepository _productRepository;
+        private readonly IRepository<Product> _productRepository;
 
-        public ProductController(IAuthenticationUser authentication, ProductRepository productRepository) : base(authentication)
+        public ProductController(IAuthenticationUser authentication, IRepository<Product> productRepository) : base(authentication)
         {
             _productRepository = productRepository;
         }

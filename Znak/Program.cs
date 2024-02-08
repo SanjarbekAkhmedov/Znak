@@ -9,12 +9,13 @@ services.AddMvc(op => { op.EnableEndpointRouting = false; });
 services.AddControllers();
 services.AddRazorPages();
 services.AddTransient<IAuthenticationUser, AuthenticationUser>();
+services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
-builder.Services.AddControllersWithViews();
+services.AddControllersWithViews();
 
-builder.Services.AddDbContext<EFContext>();
+services.AddDbContext<EFContext>();
 
-builder.Services.AddControllersWithViews();
+services.AddControllersWithViews();
 
 var app = builder.Build();
 

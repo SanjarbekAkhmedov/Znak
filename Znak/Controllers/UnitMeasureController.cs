@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Znak.Services;
 using Znak.ViewModels;
-using Znak.Repositories;
+using Znak.Model.Entities;
 
 namespace Znak.Controllers
 {
     public class UnitMeasureController : ControllerBase
     {
-        private readonly UnitMeasureRepository _unitMeasureRepository;
+        private readonly IRepository<UnitMeasure> _unitMeasureRepository;
 
-        public UnitMeasureController(IAuthenticationUser authentication, UnitMeasureRepository unitMeasureRepository) : base(authentication)
+        public UnitMeasureController(IAuthenticationUser authentication, IRepository<UnitMeasure> unitMeasureRepository) : base(authentication)
         {
             _unitMeasureRepository = unitMeasureRepository;
         }

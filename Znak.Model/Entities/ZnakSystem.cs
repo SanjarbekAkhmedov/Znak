@@ -10,7 +10,7 @@ namespace Znak.Model.Entities
         public string Address { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public List<User> Users { get; set; }
-        public List<Customer> Customers { get; set; }
+        public virtual List<User> Users { get; set; }
+        public virtual List<Customer> Customers { get; set; }
     }
 }

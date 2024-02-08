@@ -9,6 +9,6 @@ namespace Znak.Model.Entities
         public string Email { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-        public string Avatar { get; set; }
+        public byte[] Avatar { get; set; }
     }
 }

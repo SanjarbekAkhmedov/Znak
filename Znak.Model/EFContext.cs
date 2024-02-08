@@ -27,40 +27,41 @@ namespace Znak.Model
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            UserModelMapping(modelBuilder);
-            CustomerModelMapping(modelBuilder);
-            ProductModelMapping(modelBuilder);
+
             ProductCategoryModelMapping(modelBuilder);
             UnitMeasureModelMapping(modelBuilder);
             ZnakSystemModelMapping(modelBuilder);
         }
-        void UserModelMapping(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<User>().HasKey(u => u.Id);
-        }
-        void CustomerModelMapping(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Customer>().HasKey(u => u.Id);
-        }
-        void ProductModelMapping(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Product>().HasKey(u => u.Id);
-        }
+
         void ProductCategoryModelMapping(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ProductCategory>().HasKey(u => u.Id);
-            modelBuilder.Entity<ProductCategory>().HasMany(f => f.Products).WithOne(f => f.ProductCategory).HasForeignKey(s => s.ProductCategoryId);
+            modelBuilder.Entity<ProductCategory>()
+                .HasMany(pc => pc.Products)
+                .WithOne(p => p.ProductCategory)
+                .HasForeignKey(p => p.ProductCategoryId);
         }
+
+
         void UnitMeasureModelMapping(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UnitMeasure>().HasKey(u => u.Id);
-            modelBuilder.Entity<UnitMeasure>().HasMany(f => f.Products).WithOne(f => f.UnitMeasure).HasForeignKey(s => s.UnitMeasureId);
+            modelBuilder.Entity<UnitMeasure>()
+                .HasMany(u => u.Products)
+                .WithOne(p => p.UnitMeasure)
+                .HasForeignKey(p => p.UnitMeasureId);
         }
+
         void ZnakSystemModelMapping(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ZnakSystem>().HasKey(u => u.Id);
-            modelBuilder.Entity<ZnakSystem>().HasMany<User>(s => s.Users).WithOne(s => s.ZnakSystem).HasForeignKey(s => s.ZnakSystemId);
-            modelBuilder.Entity<ZnakSystem>().HasMany<Customer>(s => s.Customers).WithOne(s => s.ZnakSystem).HasForeignKey(s => s.ZnakSystemId);
+            modelBuilder.Entity<ZnakSystem>()
+                .HasMany(z => z.Users)
+                .WithOne(u => u.ZnakSystem)
+                .HasForeignKey(u => u.ZnakSystemId);
+
+            modelBuilder.Entity<ZnakSystem>()
+                .HasMany(z => z.Customers)
+                .WithOne(c => c.ZnakSystem)
+                .HasForeignKey(c => c.ZnakSystemId);
         }
+
     }
 }
