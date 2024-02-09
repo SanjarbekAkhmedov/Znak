@@ -1,0 +1,64 @@
+﻿@model ProductEditViewModel
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="text-center">Edit Product</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="Product" asp-action="EditProduct" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input class="form-control" type="text" id="name" asp-for="Name" />
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description:</label>
+                            <input class="form-control" type="text" id="description" asp-for="Description" />
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price:</label>
+                            <input class="form-control" type="text" id="price" asp-for="Price" />
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Select Category:</label>
+                            <select class="form-control" id="category" asp-for="ProductCategoryId" asp-items="@(new SelectList(ViewBag.ProductCategories, nameof(ProductCategory.Id), nameof(ProductCategory.Name), Model.ProductCategoryId))">
+                                <option value="">Select Category</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="unit">Select Unit:</label>
+                            <select class="form-control" id="unit" asp-for="UnitMeasureId" asp-items="@(new SelectList(ViewBag.UnitMeasures, nameof(UnitMeasure.Id), nameof(UnitMeasure.Name), Model.UnitMeasureId))">
+                                <option value="">Select Unit</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Upload Image:</label>
+                            <input type="file" class="form-control-file" id="image" asp-for="Image" onchange="previewImage(event)">
+                        </div>
+                        <div class="form-group">
+                            <img id="imagePreview" class="img-fluid" src="@(Model.Image)" alt="Image Preview" style="display: block;">
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success">Update Product</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var imagePreview = document.getElementById('imagePreview');
+            imagePreview.src = reader.result;
+            imagePreview.style.display = 'block';
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>

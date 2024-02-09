@@ -6,14 +6,6 @@ namespace Znak.Model.MockData
     {
         public static void CreateMockData(this EFContext Context)
         {
-            var ZnakSystem = new ZnakSystem()
-            {
-                Name = "ZnakSystem-Sanjar",
-                Phone = "123456789",
-                Email = "sanjar@gmail.com",
-                Address = "Khujand",
-                Description = string.Empty,
-            };
             var userSanjar = new User()
             {
                 FirstName = "Sanjar",
@@ -24,11 +16,9 @@ namespace Znak.Model.MockData
                 UserRole = UserRole.Admin,
                 Login = "sanjar",
                 Password = "sanjar",
-                Avatar = null,
-                ZnakSystem = ZnakSystem
+                Avatar = null
             };
 
-            Context.ZnakSystems.Add(ZnakSystem);
             Context.Users.Add(userSanjar);
 
             var ProductCategory1 = new ProductCategory()

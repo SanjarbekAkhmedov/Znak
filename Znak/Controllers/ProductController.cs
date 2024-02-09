@@ -97,8 +97,32 @@ namespace Znak.Controllers
             return View(viewModel);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            try
+            {
+                var product = await _productRepository.GetByIdAsync(id);
+                var viewModel = new ProductEditViewModel
+                {
+                    Name = product.Name,
+                    Description = product.Description,
+                    Price = product.Price,
+                    ProductCategoryId = product.ProductCategoryId,
+                    UnitMeasureId = product.UnitMeasureId,
+                    Image = product.Image
+                };
+
+                return View(viewModel);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
         [HttpPost]
-        public async Task<IActionResult> Edit(ProductViewModel viewModel)
+        public async Task<IActionResult> Edit(ProductEditViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {

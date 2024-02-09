@@ -9,7 +9,6 @@ namespace Znak.Model
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
-        public DbSet<ZnakSystem> ZnakSystems { get; set; }
         public DbSet<UnitMeasure> UnitMeasures { get; set; }
 
         public EFContext(DbContextOptions<EFContext> options) : base(options)
@@ -29,7 +28,7 @@ namespace Znak.Model
             {
                 if (entry.State == EntityState.Added)
                 {
-                    
+
                 }
             }
         }
@@ -47,7 +46,6 @@ namespace Znak.Model
 
             ProductCategoryModelMapping(modelBuilder);
             UnitMeasureModelMapping(modelBuilder);
-            ZnakSystemModelMapping(modelBuilder);
         }
 
         void ProductCategoryModelMapping(ModelBuilder modelBuilder)
@@ -66,19 +64,5 @@ namespace Znak.Model
                 .WithOne(p => p.UnitMeasure)
                 .HasForeignKey(p => p.UnitMeasureId);
         }
-
-        void ZnakSystemModelMapping(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<ZnakSystem>()
-                .HasMany(z => z.Users)
-                .WithOne(u => u.ZnakSystem)
-                .HasForeignKey(u => u.ZnakSystemId);
-
-            modelBuilder.Entity<ZnakSystem>()
-                .HasMany(z => z.Customers)
-                .WithOne(c => c.ZnakSystem)
-                .HasForeignKey(c => c.ZnakSystemId);
-        }
-
     }
 }

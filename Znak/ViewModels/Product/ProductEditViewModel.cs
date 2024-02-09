@@ -1,10 +1,11 @@
-﻿namespace Znak.ViewModels.Product
-{
-    using Microsoft.AspNetCore.Http;
-    using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-    public class ProductAddViewModel
+namespace Znak.ViewModels.Product
+{
+    public class ProductEditViewModel
     {
+        public Guid Id { get; set; }
+
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
 
@@ -22,6 +23,7 @@
         public Guid UnitMeasureId { get; set; }
 
         [Required(ErrorMessage = "Please upload an image")]
-        public IFormFile Image { get; set; }
+        public byte[] Image { get; set; }
+
     }
 }
