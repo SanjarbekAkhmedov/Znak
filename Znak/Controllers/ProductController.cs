@@ -129,7 +129,6 @@ namespace Znak.Controllers
                 return View("Index", viewModel);
             }
 
-            await _productRepository.UpdateAsync(viewModel.Product.Id, viewModel.Product);
             return RedirectToAction("Index");
         }
 
