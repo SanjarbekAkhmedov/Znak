@@ -1,7 +1,7 @@
-﻿using Znak.Model.Entities;
-
-namespace Znak.ViewModels
+﻿namespace Znak.ViewModels.Product
 {
+    using Znak.Model.Entities;
+
     public class ProductViewModel
     {
         public Product Product { get; set; }

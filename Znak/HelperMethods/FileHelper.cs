@@ -4,10 +4,17 @@
     {
         public static byte[] ConvertIFormFileToByteArray(this IFormFile file)
         {
-            using (MemoryStream memoryStream = new MemoryStream())
+            try
             {
-                file.CopyTo(memoryStream);
-                return memoryStream.ToArray();
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    file.CopyTo(memoryStream);
+                    return memoryStream.ToArray();
+                }
+            }
+            catch
+            {
+                return null;
             }
         }
     }

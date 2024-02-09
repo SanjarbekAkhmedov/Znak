@@ -1,3 +1,58 @@
-﻿@{
+﻿@model ProductViewModel
+@{
+    var products = Model.Products.ToList();
+    var productsPerRow = 3; // Number of products to display per row
 }
-<h3>Salom</h3>
+
+@for (int i = 0; i < products.Count(); i += productsPerRow)
+{
+    <div class="content justify-content-center">
+        <div class="container-fluid">
+            <div class="row">
+                @for (int j = i; j < Math.Min(i + productsPerRow, products.Count()); j++)
+                {
+                    var product = products[j];
+                    <div class="col-lg-@(12 / productsPerRow)">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        @if (product.Image != null)
+                                        {
+                                            <img src="data:image;base64,@Convert.ToBase64String(product.Image)" style="width:200px; height:200px" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/images/default-image.jpg" style="width:200px; height:200px" />
+                                        }
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <h6 class="card-title">@product.Name</h6>
+                                        <p class="card-text">@product.Description</p>
+                                        <p class="card-text">Price: @product.Price</p>
+                                        <table border="0">
+                                            <tr>
+                                                <td>
+                                                    <a href="@Url.Action("ViewProduct", "Product", new { id = product.Id })" class="btn btn-sm btn-success">View</a>
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("EditProduct", "Product", new { id = product.Id })" class="btn btn-sm btn-primary">Edit</a>
+                                                </td>
+                                                <td>
+                                                    <form method="post" action="@Url.Action("DeleteProduct", "Product", new { id = product.Id })" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+}
