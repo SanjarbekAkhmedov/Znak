@@ -170,25 +170,25 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-gears"></i>
                                 <p>
-                                    User management
+                                    Users
                                     <i class="fa fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a asp-action="Index" asp-controller="User" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>Users</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="@Url.Action("ViewUser", "user", new { id = Setting.CurrentUser.Id })" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>Profile</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a asp-action="Registration" asp-controller="User" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>Register</p>
                                     </a>

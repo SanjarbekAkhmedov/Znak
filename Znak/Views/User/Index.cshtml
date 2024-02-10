@@ -1,0 +1,55 @@
+﻿@model UserViewModel
+@{
+    var users = Model.Users.ToList();
+}
+<div class="container mt-5">
+    <div class="row">
+        @foreach (var user in users)
+        {
+            <div class="col-lg-5 col-md-6 col-sm-12 mb-4">
+                <div class="card border-0 shadow">
+                    <div class="row no-gutters">
+                        <div class="col-md-12">
+                            <div class="card-body text-center">
+                                <h4 class="card-title">@user.FirstName @user.LastName</h4>
+                                <p class="card-text">Email: @user.Email</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-center">
+                            @if (user.Avatar != null && user.Avatar.Length > 0)
+                            {
+                                <img src="data:image;base64,@Convert.ToBase64String(user.Avatar)" class="card-img" alt="User Image">
+                            }
+                            else
+                            {
+                                <img src="~/images/empty.png" class="card-img" alt="Product Image">
+                            }
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <p class="card-text">Address: @user.Address</p>
+                                <p class="card-text">Phone: @user.Phone</p>
+                                <p class="card-text">Login: @user.Login Password: @user.Password</p>
+                            </div>
+                            <div class="card-footer">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <a href="@Url.Action("ViewUser", "User", new { id = user.Id })" class="btn btn-sm btn-success">View</a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("Edit", "User", new { id = user.Id })" class="btn btn-sm btn-primary">Edit</a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("Delete", "User", new { id = user.Id })" class="btn btn-sm btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

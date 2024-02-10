@@ -2,6 +2,8 @@
 
 namespace Znak.ViewModels.Product
 {
+    using Znak.Model.Entities;
+
     public class ProductViewViewModel
     {
         public string Name { get; set; }

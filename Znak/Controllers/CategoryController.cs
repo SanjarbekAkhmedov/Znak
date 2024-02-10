@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Znak.Model.Entities;
 using Znak.Services;
-using Znak.ViewModels;
+using Znak.ViewModels.Category;
 
 namespace Znak.Controllers
 {

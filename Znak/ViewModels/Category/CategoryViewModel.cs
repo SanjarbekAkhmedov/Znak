@@ -1,6 +1,6 @@
 ﻿using Znak.Model.Entities;
 
-namespace Znak.ViewModels
+namespace Znak.ViewModels.Category
 {
     public class CategoryViewModel
     {

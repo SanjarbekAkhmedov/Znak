@@ -1,0 +1,72 @@
+﻿@model UserViewViewModel
+
+@{
+    ViewData["Title"] = "View User";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="text-center">Product Details</h4>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="FirstName">FirstName:</label>
+                        <input class="form-control" type="text" id="FirstName" value="@Model.FirstName" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label for="LastName">LastName:</label>
+                        <textarea class="form-control" id="LastName" readonly>@Model.LastName</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="Email">Email:</label>
+                        <input class="form-control" type="text" id="Email" value="@Model.Email" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label for="Address">Address:</label>
+                        <input class="form-control" type="text" id="Address" value="@Model.Address" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label for="Phone">Phone:</label>
+                        <input class="form-control" type="text" id="Phone" value="@Model.Phone" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label for="Login">Login:</label>
+                        <input class="form-control" type="text" id="Login" value="@Model.Login" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label for="Password">Password:</label>
+                        <input class="form-control" type="text" id="Password" value="@Model.Password" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Image:</label>
+                    </div>
+                    <div class="form-group">
+                        @if (Model.Avatar != null && Model.Avatar.Length > 0)
+                        {
+                            <img src="data:image;base64,@Convert.ToBase64String(Model.Avatar)" alt="User Image" style="width: 300px; height: auto;" />
+                        }
+                        else
+                        {
+                            <span>No image available</span>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <table>
+                            <tr>
+                                <td>
+                                    <a href="@Url.Action("Index", "user", new { id = Model.Id })" class="btn btn-sm btn-success">Return to Users List</a>
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Edit", "user", new { id = Model.Id })" class="btn btn-sm btn-primary">Edit</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

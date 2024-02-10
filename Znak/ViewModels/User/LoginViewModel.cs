@@ -1,4 +1,4 @@
-﻿namespace Znak.ViewModels
+﻿namespace Znak.ViewModels.User
 {
     public class LoginViewModel
     {

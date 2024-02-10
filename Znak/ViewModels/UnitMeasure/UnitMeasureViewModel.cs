@@ -1,7 +1,6 @@
-﻿using Znak.Model.Entities;
-
-namespace Znak.ViewModels
+﻿namespace Znak.ViewModels.UnitMeasure
 {
+    using Znak.Model.Entities;
     public class UnitMeasureViewModel
     {
         public UnitMeasure UnitMeasure { get; set; }

@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Znak.HelperMethods;
 using Znak.Model;
+using Znak.Model.Entities;
 using Znak.Model.MockData;
 using Znak.Services;
-using Znak.ViewModels;
+using Znak.ViewModels.Product;
+using Znak.ViewModels.User;
 
 namespace Znak.Controllers
 {
@@ -11,8 +13,9 @@ namespace Znak.Controllers
     public class UserController : ControllerBase
     {
         private readonly EFContext context;
+        private readonly IRepository<User> userRepository;
 
-        public UserController(IAuthenticationUser authentication, EFContext context) : base(authentication)
+        public UserController(IAuthenticationUser authentication, EFContext context, IRepository<User> userRepository) : base(authentication)
         {
             if (!context.Users.Any())
             {
@@ -21,6 +24,7 @@ namespace Znak.Controllers
             }
 
             this.context = context;
+            this.userRepository = userRepository;
         }
 
         [HttpGet]
@@ -36,11 +40,11 @@ namespace Znak.Controllers
         }
 
         [HttpPost(nameof(Registration))]
-        public IActionResult Registration(RegistrationViewModel viewModel)
+        public async Task<IActionResult> Registration(RegistrationViewModel viewModel)
         {
             try
             {
-                context.Users.Add(new Model.Entities.User
+                await userRepository.CreateAsync(new User
                 {
                     FirstName = viewModel.FirstName,
                     LastName = viewModel.LastName,
@@ -49,7 +53,7 @@ namespace Znak.Controllers
                     Login = viewModel.Login,
                     Password = viewModel.Password,
                     Avatar = viewModel.Avatar.ConvertIFormFileToByteArray(),
-                    UserRole = Model.Entities.UserRole.Admin
+                    UserRole = UserRole.Admin
                 });
                 context.SaveChanges();
                 return RedirectToAction(nameof(RegistrationSuccessful));
@@ -64,6 +68,43 @@ namespace Znak.Controllers
         public IActionResult RegistrationSuccessful()
         {
             return View();
+        }
+
+        [HttpGet(nameof(Index))]
+        public async Task<IActionResult> Index()
+        {
+            var viewModel = new UserViewModel()
+            {
+                Users = await userRepository.GetAllAsync()
+            };
+            return View(viewModel);
+        }
+
+        [HttpGet(nameof(ViewUser))]
+        public async Task<IActionResult> ViewUser(Guid id)
+        {
+            try
+            {
+                var user = await userRepository.GetByIdAsync(id);
+                var viewModel = new UserViewViewModel
+                {
+                    Id = user.Id,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    Address = user.Address,
+                    Phone = user.Phone,
+                    Login = user.Login,
+                    Password = user.Password,
+                    Avatar = user.Avatar
+                };
+
+                return View(viewModel);
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Index));
+            }
         }
     }
 }

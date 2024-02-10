@@ -2,7 +2,7 @@
 using System.Reflection.Metadata.Ecma335;
 using Znak.Model.Entities;
 using Znak.Services;
-using Znak.ViewModels;
+using Znak.ViewModels.User;
 
 namespace Znak.Controllers
 {
