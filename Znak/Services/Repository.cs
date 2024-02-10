@@ -56,5 +56,17 @@ namespace Znak.Services
         {
             return await _context.Set<T>().AnyAsync(e => e.Id == id);
         }
+
+        public async Task<bool> TrySaveAsync()
+        {
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch { }
+
+            return false;
+        }
     }
 }

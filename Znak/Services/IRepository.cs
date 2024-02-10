@@ -10,5 +10,6 @@ namespace Znak.Services
         Task UpdateAsync(Guid id, T entity);
         Task DeleteAsync(Guid id);
         Task<bool> ExistsAsync(Guid id);
+        Task<bool> TrySaveAsync();
     }
 }

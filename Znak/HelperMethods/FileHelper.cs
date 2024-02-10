@@ -4,6 +4,9 @@
     {
         public static byte[] ConvertIFormFileToByteArray(this IFormFile file)
         {
+            if (file == null)
+                return null;
+
             try
             {
                 using (MemoryStream memoryStream = new MemoryStream())

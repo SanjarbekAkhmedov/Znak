@@ -10,11 +10,7 @@ namespace Znak.ViewModels.Product
 
         public decimal Price { get; set; }
 
-        public Guid ProductCategoryId { get; set; }
-
         public ProductCategory ProductCategory { get; set; }
-
-        public Guid UnitMeasureId { get; set; }
 
         public UnitMeasure UnitMeasure { get; set; }
 

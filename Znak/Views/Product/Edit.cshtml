@@ -8,7 +8,7 @@
                     <h4 class="text-center">Edit Product</h4>
                 </div>
                 <div class="card-body">
-                    <form method="post" asp-controller="Product" asp-action="EditProduct" enctype="multipart/form-data">
+                    <form method="post" asp-controller="Product" asp-action="Edit" enctype="multipart/form-data">
                         <input type="hidden" asp-for="Id" />
                         <div class="form-group">
                             <label for="name">Name:</label>
@@ -37,9 +37,17 @@
                         <div class="form-group">
                             <label for="image">Upload Image:</label>
                             <input type="file" class="form-control-file" id="image" asp-for="Image" onchange="previewImage(event)">
+                            <input type="hidden" asp-for="ImageBytes" />
                         </div>
-                        <div class="form-group">
-                            <img id="imagePreview" class="img-fluid" src="@(Model.Image)" alt="Image Preview" style="display: block;">
+                        <div class="form-group" id="imageContainer">
+                            @if (Model.ImageBytes != null)
+                            {
+                                <img id="imagePreview" class="img-fluid" src="data:image;base64,@Convert.ToBase64String(Model.ImageBytes)" alt="Image Preview" style="display: block;">
+                            }
+                            else
+                            {
+                                <span id="noImageText" style="display: none;">No image available</span>
+                            }
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-success">Update Product</button>
@@ -58,6 +66,8 @@
             var imagePreview = document.getElementById('imagePreview');
             imagePreview.src = reader.result;
             imagePreview.style.display = 'block';
+            var noImageText = document.getElementById('noImageText');
+            noImageText.style.display = 'none';
         }
         reader.readAsDataURL(event.target.files[0]);
     }

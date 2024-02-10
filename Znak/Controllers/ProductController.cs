@@ -48,7 +48,7 @@ namespace Znak.Controllers
 
                 return View(viewModel);
             }
-            catch (Exception ex)
+            catch
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -103,41 +103,73 @@ namespace Znak.Controllers
             try
             {
                 var product = await _productRepository.GetByIdAsync(id);
+                ViewBag.ProductCategories = await _productCategoryRepository.GetAllAsync();
+                ViewBag.UnitMeasures = await _unitMeasureRepository.GetAllAsync();
                 var viewModel = new ProductEditViewModel
                 {
+                    Id = product.Id,
                     Name = product.Name,
                     Description = product.Description,
                     Price = product.Price,
                     ProductCategoryId = product.ProductCategoryId,
                     UnitMeasureId = product.UnitMeasureId,
-                    Image = product.Image
+                    ImageBytes = product.Image
                 };
 
                 return View(viewModel);
             }
-            catch (Exception ex)
+            catch
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction(nameof(Index));
             }
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(ProductEditViewModel viewModel)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return View("Index", viewModel);
+                try
+                {
+                    var product = await _productRepository.GetByIdAsync(viewModel.Id);
+                    product.Name = viewModel.Name;
+                    product.Price = viewModel.Price;
+                    product.Description = viewModel.Description;
+                    product.Image = viewModel.Image.ConvertIFormFileToByteArray() ?? viewModel.ImageBytes;
+                    product.ProductCategoryId = viewModel.ProductCategoryId;
+                    product.UnitMeasureId = viewModel.UnitMeasureId;
+
+                    await _productRepository.TrySaveAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch
+                {
+                    ModelState.AddModelError("", "Failed to edit the product. Please try again later.");
+                    return View(viewModel);
+                }
             }
 
-            return RedirectToAction("Index");
+            return View(viewModel);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Delete(ProductViewModel viewModel)
+        [HttpGet]
+        public IActionResult Deleted()
         {
-            await _productRepository.DeleteAsync(viewModel.Product.Id);
-            return RedirectToAction("Index");
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            try
+            {
+                await _productRepository.DeleteAsync(id);
+                return RedirectToAction(nameof(Deleted));
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Index));
+            }
         }
     }
-
 }

@@ -22,8 +22,8 @@ namespace Znak.ViewModels.Product
         [Required(ErrorMessage = "Please select a unit")]
         public Guid UnitMeasureId { get; set; }
 
-        [Required(ErrorMessage = "Please upload an image")]
-        public byte[] Image { get; set; }
+        public IFormFile Image { get; set; }
 
+        public byte[] ImageBytes { get; set; }
     }
 }

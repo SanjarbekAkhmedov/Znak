@@ -34,9 +34,11 @@
                     </div>
                     <div class="form-group">
                         <label for="image">Image:</label>
+                    </div>
+                    <div class="form-group">
                         @if (Model.Image != null && Model.Image.Length > 0)
                         {
-                            <img src="data:image;base64,@Convert.ToBase64String(Model.Image)" alt="Product Image" style="width: 400px; height: auto;" />
+                            <img src="data:image;base64,@Convert.ToBase64String(Model.Image)" alt="Product Image" style="width: 300px; height: auto;" />
                         }
                         else
                         {
