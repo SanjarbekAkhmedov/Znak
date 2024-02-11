@@ -102,9 +102,9 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        @if (Setting.CurrentUser.Avatar != null && Setting.CurrentUser.Avatar.Length > 0)
+                        @if (Setting.CurrentUser?.Avatar != null && Setting.CurrentUser?.Avatar?.Length > 0)
                         {
-                            string imageBase64 = Convert.ToBase64String(Setting.CurrentUser.Avatar);
+                            string imageBase64 = Convert.ToBase64String(Setting.CurrentUser?.Avatar);
                             <img src="data:image;base64,@imageBase64" class="img-size-50 mr-3 img-circle" alt="Изображение пользователя">
                         }
                         else
@@ -113,7 +113,7 @@
                         }
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">@Setting.CurrentUser.FirstName @Setting.CurrentUser.LastName</a>
+                        <a href="#" class="d-block">@Setting.CurrentUser?.FirstName @Setting.CurrentUser?.LastName</a>
                     </div>
                 </div>
 
@@ -124,7 +124,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-bars"></i>
                                 <p>
-                                    Товары
+                                    Товарами
                                     <i class="fa fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -166,11 +166,43 @@
                                 </li>
                             </ul>
                         </li>
+
+                        <!-- Заказы -->
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-shopping-cart"></i>
+                                <p>
+                                    Заказы
+                                    <i class="fa fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a asp-action="Index" asp-controller="Order" class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Все заказы</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-action="PendingOrders" asp-controller="Order" class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Ожидающие заказы</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-action="CompletedOrders" asp-controller="Order" class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Завершенные заказы</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-gears"></i>
                                 <p>
-                                    Пользователи
+                                    Пользователями
                                     <i class="fa fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -214,7 +246,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a asp-action="Login" asp-controller="User" class="nav-link">
                                 <i class="nav-icon fa fa-circle-o text-danger"></i>
                                 <p class="text">Выйти</p>
                             </a>

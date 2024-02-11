@@ -4,6 +4,11 @@
 }
 
 <div class="container mt-5">
+    <div class="row mb-3">
+        <div class="col">
+            <a asp-action="AddProduct" asp-controller="Product" class="btn btn-primary">Добавить товар</a>
+        </div>
+    </div>
     <div class="row">
         @foreach (var product in products)
         {

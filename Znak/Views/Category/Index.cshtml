@@ -8,38 +8,36 @@
     int counter = 0;
     if (Model.ProductCategories.Any())
     {
-        <div>
-            <div class="table-responsive">
-                <table id="myTable" class="table table-striped" style="width: 100%;border-width:2px;">
-                    <thead>
-                        <tr class="row-cols-6">
-                            <th style="display:none"></th>
-                            <th class="col-1">№</th>
-                            <th class="col-1">Название</th>
-                            <th class="col-1">Описание</th>
-                            <th class="col-6"></th>
+        <div class="table-responsive">
+            <table id="myTable" class="table table-striped" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th style="display:none; width: 0%;">ID</th>
+                        <th style="width: 5%;">№</th>
+                        <th style="width: 20%;">Название</th>
+                        <th style="width: 55%;">Описание</th>
+                        <th style="width: 30%;">Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ProductCategory category in Model.ProductCategories)
+                    {
+                        counter++;
+                        <tr>
+                            <td style="display:none">@category.Id</td>
+                            <td>@counter</td>
+                            <td>@category.Name</td>
+                            <td>@category.Description</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-success" onclick="btnEditClick(@counter)">Изменить</button>
+                                    <button type="button" class="btn btn-sm btn-danger" onclick="btnDeleteClick(@counter)">Удалить</button>
+                                </div>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-style:italic;font-weight:500">
-                        @foreach (ProductCategory category in Model.ProductCategories)
-                        {
-                            counter++;
-                            <tr class="row-cols-6" id="IdTr">
-                                <td style="display:none">@category.Id</td>
-                                <td class="col-1">@counter</td>
-                                <td class="col-1" style="text-align: center;">@category.Name</td>
-                                <td class="col-1" style="text-align: center;">@category.Description</td>
-                                <td class="col-6">
-                                    <div style="position: absolute;right:10px; text-align:center">
-                                        <input class="btn btn-sm btn-success" id="myModelEditBtn" type="button" value="Изменить" onclick="btnEditClick(@counter)" />
-                                        <input class="btn btn-sm btn-success" type="button" value="Удалить" onclick="btnDeleteClick(@counter)" />
-                                    </div>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+                    }
+                </tbody>
+            </table>
         </div>
     }
 }
