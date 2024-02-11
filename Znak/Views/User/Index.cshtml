@@ -12,27 +12,34 @@
                         <div class="col-md-12">
                             <div class="card-body text-center">
                                 <h4 class="card-title">@user.FirstName @user.LastName</h4>
-                                <p class="card-text">Email: @user.Email</p>
+                                <p class="card-text" style="margin-bottom: 0;">Email: @user.Email</p>
                             </div>
                         </div>
                         <div class="col-md-4 d-flex align-items-center">
                             @if (user.Avatar != null && user.Avatar.Length > 0)
                             {
-                                <img src="data:image;base64,@Convert.ToBase64String(user.Avatar)" class="card-img" alt="User Image">
+                                <img src="data:image;base64,@Convert.ToBase64String(user.Avatar)" class="card-img" alt="User Image" style="margin-left: 10px;">
                             }
                             else
                             {
-                                <img src="~/images/empty.png" class="card-img" alt="Product Image">
+                                <img src="~/images/empty.png" class="card-img" alt="Product Image" style="margin-left: 10px;">
                             }
                         </div>
                         <div class="col-md-8">
-                            <div class="card-body">
-                                <p class="card-text">Address: @user.Address</p>
-                                <p class="card-text">Phone: @user.Phone</p>
+                            <div class="card-body mt-3">
+                                <p class="card-text" style="margin-bottom: 0;">Address: @user.Address</p>
+                                @if (string.IsNullOrEmpty(user.Phone))
+                                {
+                                    <p class="card-text" style="margin-bottom: 0;">Phone: Is not set</p>
+                                }
+                                else
+                                {
+                                    <p class="card-text" style="margin-bottom: 0;">Phone: @user.Phone</p>
+                                }
                                 <p class="card-text">Login: @user.Login Password: @user.Password</p>
                             </div>
-                            <div class="card-footer">
-                                <table>
+                            <div class="card-footer mt-auto">
+                                <table class="mx-auto">
                                     <tr>
                                         <td>
                                             <a href="@Url.Action("ViewUser", "User", new { id = user.Id })" class="btn btn-sm btn-success">View</a>
