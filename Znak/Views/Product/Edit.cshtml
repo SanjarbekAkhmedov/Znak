@@ -5,37 +5,37 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="text-center">Edit Product</h4>
+                    <h4 class="text-center">Изменить продукт</h4>
                 </div>
                 <div class="card-body">
                     <form method="post" asp-controller="Product" asp-action="Edit" enctype="multipart/form-data">
                         <input type="hidden" asp-for="Id" />
                         <div class="form-group">
-                            <label for="name">Name:</label>
+                            <label for="name">Название:</label>
                             <input class="form-control" type="text" id="name" asp-for="Name" />
                         </div>
                         <div class="form-group">
-                            <label for="description">Description:</label>
+                            <label for="description">Описание:</label>
                             <input class="form-control" type="text" id="description" asp-for="Description" />
                         </div>
                         <div class="form-group">
-                            <label for="price">Price:</label>
+                            <label for="price">Цена:</label>
                             <input class="form-control" type="text" id="price" asp-for="Price" />
                         </div>
                         <div class="form-group">
-                            <label for="category">Select Category:</label>
+                            <label for="category">Выберите категорию:</label>
                             <select class="form-control" id="category" asp-for="ProductCategoryId" asp-items="@(new SelectList(ViewBag.ProductCategories, nameof(ProductCategory.Id), nameof(ProductCategory.Name), Model.ProductCategoryId))">
-                                <option value="">Select Category</option>
+                                <option value="">Выберите категорию</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="unit">Select Unit:</label>
+                            <label for="unit">Выберите единицу измерения:</label>
                             <select class="form-control" id="unit" asp-for="UnitMeasureId" asp-items="@(new SelectList(ViewBag.UnitMeasures, nameof(UnitMeasure.Id), nameof(UnitMeasure.Name), Model.UnitMeasureId))">
-                                <option value="">Select Unit</option>
+                                <option value="">Выберите единицу измерения</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="image">Upload Image:</label>
+                            <label for="image">Загрузите изображение:</label>
                             <input type="file" class="form-control-file" id="image" asp-for="Image" onchange="previewImage(event)">
                             <input type="hidden" asp-for="ImageBytes" />
                         </div>
@@ -46,14 +46,14 @@
                             }
                             else
                             {
-                                <span id="noImageText" style="display: none;">No image available</span>
+                                <span id="noImageText" style="display: none;">Изображение не доступно</span>
                             }
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-success">Update Product</button>
+                            <button type="submit" class="btn btn-success">Обновить продукт</button>
                         </div>
                         <div class="form-group">
-                            <p><a asp-action="Index" asp-controller="Product">Return to Product List</a></p>
+                            <p><a asp-action="Index" asp-controller="Product">Вернуться к списку продуктов</a></p>
                         </div>
                     </form>
                 </div>
@@ -75,3 +75,4 @@
         reader.readAsDataURL(event.target.files[0]);
     }
 </script>
+

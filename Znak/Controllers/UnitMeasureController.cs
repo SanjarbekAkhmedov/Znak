@@ -27,13 +27,15 @@ namespace Znak.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(UnitMeasureViewModel viewModel)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return View("Index", viewModel);
+                await _unitMeasureRepository.CreateAsync(viewModel.UnitMeasure);
+                return RedirectToAction("Index");
             }
-
-            await _unitMeasureRepository.CreateAsync(viewModel.UnitMeasure);
-            return RedirectToAction("Index");
+            catch
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpPost]

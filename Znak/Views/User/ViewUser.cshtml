@@ -1,7 +1,7 @@
 ﻿@model UserViewViewModel
 
 @{
-    ViewData["Title"] = "View User";
+    ViewData["Title"] = "Просмотр пользователя";
 }
 
 <div class="container">
@@ -9,58 +9,58 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="text-center">Product Details</h4>
+                    <h4 class="text-center">Детали пользователя</h4>
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="FirstName">FirstName:</label>
+                        <label for="FirstName">Имя:</label>
                         <input class="form-control" type="text" id="FirstName" value="@Model.FirstName" readonly />
                     </div>
                     <div class="form-group">
-                        <label for="LastName">LastName:</label>
+                        <label for="LastName">Фамилия:</label>
                         <textarea class="form-control" id="LastName" readonly>@Model.LastName</textarea>
                     </div>
                     <div class="form-group">
-                        <label for="Email">Email:</label>
+                        <label for="Email">Электронная почта:</label>
                         <input class="form-control" type="text" id="Email" value="@Model.Email" readonly />
                     </div>
                     <div class="form-group">
-                        <label for="Address">Address:</label>
+                        <label for="Address">Адрес:</label>
                         <input class="form-control" type="text" id="Address" value="@Model.Address" readonly />
                     </div>
                     <div class="form-group">
-                        <label for="Phone">Phone:</label>
+                        <label for="Phone">Телефон:</label>
                         <input class="form-control" type="text" id="Phone" value="@Model.Phone" readonly />
                     </div>
                     <div class="form-group">
-                        <label for="Login">Login:</label>
+                        <label for="Login">Логин:</label>
                         <input class="form-control" type="text" id="Login" value="@Model.Login" readonly />
                     </div>
                     <div class="form-group">
-                        <label for="Password">Password:</label>
+                        <label for="Password">Пароль:</label>
                         <input class="form-control" type="text" id="Password" value="@Model.Password" readonly />
                     </div>
                     <div class="form-group">
-                        <label for="image">Image:</label>
+                        <label for="image">Изображение:</label>
                     </div>
                     <div class="form-group">
                         @if (Model.Avatar != null && Model.Avatar.Length > 0)
                         {
-                            <img src="data:image;base64,@Convert.ToBase64String(Model.Avatar)" alt="User Image" style="width: 300px; height: auto;" />
+                            <img src="data:image;base64,@Convert.ToBase64String(Model.Avatar)" alt="Изображение пользователя" style="width: 300px; height: auto;" />
                         }
                         else
                         {
-                            <span>No image available</span>
+                            <span>Изображение отсутствует</span>
                         }
                     </div>
                     <div class="form-group">
                         <table>
                             <tr>
                                 <td>
-                                    <a href="@Url.Action("Index", "user", new { id = Model.Id })" class="btn btn-sm btn-success">Return to Users List</a>
+                                    <a href="@Url.Action("Index", "user", new { id = Model.Id })" class="btn btn-sm btn-success">Вернуться к списку пользователей</a>
                                 </td>
                                 <td>
-                                    <a href="@Url.Action("Edit", "user", new { id = Model.Id })" class="btn btn-sm btn-primary">Edit</a>
+                                    <a href="@Url.Action("Edit", "user", new { id = Model.Id })" class="btn btn-sm btn-primary">Редактировать</a>
                                 </td>
                             </tr>
                         </table>

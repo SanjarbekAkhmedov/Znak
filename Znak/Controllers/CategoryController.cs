@@ -27,13 +27,15 @@ namespace Znak.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(CategoryViewModel viewModel)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return View("Index", viewModel);
+                await _categoryRepository.CreateAsync(viewModel.ProductCategory);
+                return RedirectToAction(nameof(Index));
             }
-
-            await _categoryRepository.CreateAsync(viewModel.ProductCategory);
-            return RedirectToAction("Index");
+            catch
+            {
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         [HttpPost]
@@ -41,18 +43,18 @@ namespace Znak.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("Index", viewModel);
+                return View(nameof(Index), viewModel);
             }
 
             await _categoryRepository.UpdateAsync(viewModel.ProductCategory.Id, viewModel.ProductCategory);
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(CategoryViewModel viewModel)
         {
             await _categoryRepository.DeleteAsync(viewModel.ProductCategory.Id);
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
     }
 

@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Admin | Log in</title>
+    <title>Администратор | Вход</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Theme style -->
@@ -18,33 +18,33 @@
 <body class="login-page" style="background: linear-gradient(#92c51c, #9ce3ef, #3dbc44);">
     <div class="login-box">
         <div class="login-logo">
-            <a href="#"><b>Admin</b></a>
+            <a href="#"><b>Администратор</b></a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                <p class="login-box-msg">Войдите, чтобы начать сеанс</p>
 
                 <form method="post" asp-controller="Admin" asp-action="Admin" enctype="multipart/form-data">
                     <div class="form-group has-feedback">
-                        <input type="text" class="form-control" placeholder="Login" asp-for="Login" required>
+                        <input type="text" class="form-control" placeholder="Логин" asp-for="Login" required>
                         <span class="fa fa-envelope form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
-                        <input type="password" class="form-control" placeholder="Password" asp-for="Password" required>
+                        <input type="password" class="form-control" placeholder="Пароль" asp-for="Password" required>
                         <span class="fa fa-lock form-control-feedback"></span>
                     </div>
                     <div class="row">
                         <div class="col-8">
                             <div class="checkbox icheck">
                                 <label>
-                                    <input type="checkbox"> Remember Me
+                                    <input type="checkbox"> Запомнить меня
                                 </label>
                             </div>
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                            <button type="submit" class="btn btn-primary btn-block btn-flat">Войти</button>
                         </div>
                         <!-- /.col -->
                     </div>
@@ -52,7 +52,7 @@
 
                 <!-- /.social-auth-links -->
                 <p class="mb-0">
-                    <a asp-controller="User" asp-action="Registration" class="text-center">Register a new membership</a>
+                    <a asp-controller="User" asp-action="Registration" class="text-center">Зарегистрировать нового пользователя</a>
                 </p>
             </div>
             <!-- /.login-card-body -->

@@ -4,7 +4,6 @@ using Znak.Model;
 using Znak.Model.Entities;
 using Znak.Model.MockData;
 using Znak.Services;
-using Znak.ViewModels.Product;
 using Znak.ViewModels.User;
 
 namespace Znak.Controllers
@@ -105,6 +104,78 @@ namespace Znak.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
+        }
+
+        [HttpGet(nameof(Edit))]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            try
+            {
+                var user = await userRepository.GetByIdAsync(id);
+                var viewModel = new UserEditViewModel
+                {
+                    Id = user.Id,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    Address = user.Address,
+                    Phone = user.Phone,
+                    Login = user.Login,
+                    Password = user.Password,
+                    ImageBytes = user.Avatar
+                };
+
+                return View(viewModel);
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+        [HttpPost(nameof(Edit))]
+        public async Task<IActionResult> Edit(UserEditViewModel viewModel)
+        {
+            try
+            {
+                var user = await userRepository.GetByIdAsync(viewModel.Id);
+                user.FirstName = user.FirstName;
+                user.LastName = user.LastName;
+                user.Email = user.Email;
+                user.Address = user.Address;
+                user.Phone = user.Phone;
+                user.Avatar = viewModel.Image == null ? viewModel.ImageBytes : viewModel.Image.ConvertIFormFileToByteArray();
+                user.Login = user.Login;
+                user.Password = user.Password;
+
+                await userRepository.TrySaveAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View(viewModel);
+            }
+        }
+
+        [HttpGet(nameof(Delete))]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            try
+            {
+                await userRepository.DeleteAsync(id);
+                return RedirectToAction(nameof(Deleted));
+            }
+            catch (Exception)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+        [HttpGet(nameof(Deleted))]
+        public IActionResult Deleted()
+        {
+            return View();
         }
     }
 }

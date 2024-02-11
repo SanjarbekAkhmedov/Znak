@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>User Registration</title>
+    <title>Регистрация пользователя</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Theme style -->
@@ -18,47 +18,47 @@
 <body class="login-page" style="background: linear-gradient(#92c51c, #9ce3ef, #3dbc44);">
     <div class="login-box">
         <div class="login-logo">
-            <a href="#"><b>User</b> Registration</a>
+            <a href="#"><b>Пользователь</b> Регистрация</a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Register a new membership</p>
+                <p class="login-box-msg">Зарегистрировать новое членство</p>
 
                 <form method="post" asp-controller="User" asp-action="Registration" enctype="multipart/form-data">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="First Name" asp-for="FirstName" required>
+                        <input type="text" class="form-control" placeholder="Имя" asp-for="FirstName" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Last Name" asp-for="LastName" required>
+                        <input type="text" class="form-control" placeholder="Фамилия" asp-for="LastName" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Phone" asp-for="Phone" required>
+                        <input type="text" class="form-control" placeholder="Телефон" asp-for="Phone" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Address" asp-for="Address" required>
+                        <input type="text" class="form-control" placeholder="Адрес" asp-for="Address" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Email" asp-for="Email" required>
+                        <input type="email" class="form-control" placeholder="Эл. почта" asp-for="Email" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Login" asp-for="Login" required>
+                        <input type="text" class="form-control" placeholder="Логин" asp-for="Login" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Password" asp-for="Password" required>
+                        <input type="password" class="form-control" placeholder="Пароль" asp-for="Password" required>
                     </div>
                     <div class="form-group">
-                        <label for="avatar">Avatar</label>
+                        <label for="avatar">Аватар</label>
                         <input type="file" class="form-control-file" id="avatar" asp-for="Avatar" onchange="previewAvatar()">
                     </div>
                     <div class="form-group">
-                        <img id="avatar-preview" src="#" alt="Avatar Preview" style="display: none; max-width: 100px; max-height: 100px;">
+                        <img id="avatar-preview" src="#" alt="Предварительный просмотр аватара" style="display: none; max-width: 100px; max-height: 100px;">
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Зарегистрироваться</button>
                 </form>
 
                 <p class="mt-2 mb-0">
-                    <a asp-controller="User" asp-action="Login" class="text-center">Already have an account? Sign in</a>
+                    <a asp-controller="User" asp-action="Login" class="text-center">Уже есть аккаунт? Войти</a>
                 </p>
             </div>
             <!-- /.login-card-body -->

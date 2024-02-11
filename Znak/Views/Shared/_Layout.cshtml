@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Admin</title>
+    <title>Администратор</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -33,17 +33,17 @@
                     <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a asp-controller="Admin" asp-action="Index" class="nav-link">Home</a>
+                    <a asp-controller="Admin" asp-action="Index" class="nav-link">Главная</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
+                    <a href="#" class="nav-link">Контакты</a>
                 </li>
             </ul>
 
             <!-- SEARCH FORM -->
             <form class="form-inline ml-3">
                 <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control form-control-navbar" type="search" placeholder="Поиск" aria-label="Поиск">
                     <div class="input-group-append">
                         <button class="btn btn-navbar" type="button">
                             <i class="fa fa-search"></i>
@@ -62,7 +62,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+                        <a href="#" class="dropdown-item dropdown-footer">Посмотреть все сообщения</a>
                     </div>
                 </li>
                 <!-- Notifications Dropdown Menu -->
@@ -72,19 +72,19 @@
                         <span class="badge badge-warning navbar-badge">15</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-item dropdown-header">15 Notifications</span>
+                        <span class="dropdown-item dropdown-header">15 Уведомлений</span>
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item">
-                            <i class="fa fa-envelope mr-2"></i> 4 new messages
-                            <span class="float-right text-muted text-sm">3 mins</span>
+                            <i class="fa fa-envelope mr-2"></i> 4 новых сообщения
+                            <span class="float-right text-muted text-sm">3 мин</span>
                         </a>
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item">
-                            <i class="fa fa-users mr-2"></i> 8 friend requests
-                            <span class="float-right text-muted text-sm">12 hours</span>
+                            <i class="fa fa-users mr-2"></i> 8 запросов на добавление в друзья
+                            <span class="float-right text-muted text-sm">12 часов</span>
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                        <a href="#" class="dropdown-item dropdown-footer">Посмотреть все уведомления</a>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -105,11 +105,11 @@
                         @if (Setting.CurrentUser.Avatar != null && Setting.CurrentUser.Avatar.Length > 0)
                         {
                             string imageBase64 = Convert.ToBase64String(Setting.CurrentUser.Avatar);
-                            <img src="data:image;base64,@imageBase64" class="img-size-50 mr-3 img-circle" alt="User Image">
+                            <img src="data:image;base64,@imageBase64" class="img-size-50 mr-3 img-circle" alt="Изображение пользователя">
                         }
                         else
                         {
-                            <img src="~/images/default-avatar.jpg" class="img-size-50 mr-3 img-circle" alt="Default Avatar">
+                            <img src="~/images/default-avatar.jpg" class="img-size-50 mr-3 img-circle" alt="Изображение пользователя по умолчанию">
                         }
                     </div>
                     <div class="info">
@@ -124,7 +124,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-bars"></i>
                                 <p>
-                                    Products
+                                    Товары
                                     <i class="fa fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -132,13 +132,13 @@
                                 <li class="nav-item">
                                     <a asp-action="Index" asp-controller="Product" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Products</p>
+                                        <p>Товары</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a asp-action="AddProduct" asp-controller="Product" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Add Product</p>
+                                        <p>Добавить товар</p>
                                     </a>
                                 </li>
                             </ul>
@@ -147,7 +147,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-sitemap"></i>
                                 <p>
-                                    Product Items
+                                    Элементы продукта
                                     <i class="fa fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -155,13 +155,13 @@
                                 <li class="nav-item">
                                     <a asp-action="Index" asp-controller="Category" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Categories</p>
+                                        <p>Категории</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a asp-action="Index" asp-controller="UnitMeasure" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>UnitMeasures</p>
+                                        <p>Единицы измерения</p>
                                     </a>
                                 </li>
                             </ul>
@@ -170,7 +170,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-gears"></i>
                                 <p>
-                                    Users
+                                    Пользователи
                                     <i class="fa fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -178,19 +178,19 @@
                                 <li class="nav-item">
                                     <a asp-action="Index" asp-controller="User" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Users</p>
+                                        <p>Пользователи</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="@Url.Action("ViewUser", "user", new { id = Setting.CurrentUser.Id })" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Profile</p>
+                                        <p>Профиль</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a asp-action="Registration" asp-controller="User" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Register</p>
+                                        <p>Зарегистрироваться</p>
                                     </a>
                                 </li>
                             </ul>
@@ -199,7 +199,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-pie-chart"></i>
                                 <p>
-                                    Dashboard
+                                    Панель управления
                                     <i class="right fa fa-angle-left"></i>
                                 </p>
                             </a>
@@ -207,7 +207,7 @@
                                 <li class="nav-item">
                                     <a asp-controller="Dashboard" asp-action="Index" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Dashboard v1</p>
+                                        <p>Панель управления v1</p>
                                     </a>
                                 </li>
 
@@ -216,7 +216,7 @@
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-circle-o text-danger"></i>
-                                <p class="text">Log out</p>
+                                <p class="text">Выйти</p>
                             </a>
                         </li>
                     </ul>
@@ -234,9 +234,9 @@
 
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Author : <a href="#">Akhmedov Sanjar</a>.</strong>
+            <strong>Автор: <a href="#">Ахмедов Санджар</a>.</strong>
             <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 1.0.0
+                <b>Версия</b> 1.0.0
             </div>
         </footer>
 
